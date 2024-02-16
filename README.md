@@ -22,7 +22,10 @@ git clone https://github.com/IsaacHarrison28/Organize-360.git
 npm install
 ```
 
-then followed by:
+At this point, connect a postgresql database to the api by creating a .env file in the root of the api/ directory. Use the blueprint defined in the .env.copy file as shown in the image below:
+![env copy image](./api/images/env-copy.png)
+
+After you have added the credentials needed, run the following command in your terminal to start the api:
 
 ```
 npm run start
