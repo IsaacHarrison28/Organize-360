@@ -23,6 +23,7 @@ const TodosHome = () => {
       .then((response) => response.json())
       .then((data) => {
         changeListOfTodos(data);
+        console.log(data);
       });
   }
 
@@ -54,6 +55,14 @@ const TodosHome = () => {
         mx={{ base: "-1" }}
       >
         {listOfTodos.map((Todo) => {
+          let completedTodoStatus = false;
+
+          if (Todo.status === "completed") {
+            completedTodoStatus = true;
+          }
+
+          console.log(`Todo status for ${Todo.id} is ${completedTodoStatus}`);
+
           return (
             <Box
               flex="1 0 calc(50% - 0.5rem)"
@@ -106,10 +115,7 @@ const TodosHome = () => {
                   </FormLabel>
                   <Switch
                     id="isCompleted"
-                    isChecked={true}
-                    onChange={() => {
-                      // changeIsCompletedState(!isCompletedState);
-                    }}
+                    isChecked={completedTodoStatus}
                     colorScheme="green"
                     size="md"
                   />
