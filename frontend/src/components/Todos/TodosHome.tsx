@@ -23,7 +23,6 @@ const TodosHome = () => {
       .then((response) => response.json())
       .then((data) => {
         changeListOfTodos(data);
-        console.log(data);
       });
   }
 
@@ -56,12 +55,11 @@ const TodosHome = () => {
       >
         {listOfTodos.map((Todo) => {
           let completedTodoStatus = false;
+          let Todo_id = Todo.id;
 
           if (Todo.status === "completed") {
             completedTodoStatus = true;
           }
-
-          console.log(`Todo status for ${Todo.id} is ${completedTodoStatus}`);
 
           return (
             <Box
@@ -115,6 +113,39 @@ const TodosHome = () => {
                   </FormLabel>
                   <Switch
                     id="isCompleted"
+                    onChange={() => {
+                      const todo_url = `http://localhost:8080/todos/${Todo_id}`;
+
+                      let new_status = "pending";
+
+                      if (completedTodoStatus === false) {
+                        new_status = "completed";
+                      }
+
+                      const new_data = { ...Todo, status: new_status };
+
+                      const options = {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify(new_data),
+                      };
+
+                      fetch(todo_url, options)
+                        .then((response) => {
+                          if (!response.ok) {
+                            throw new Error("Network response was not ok");
+                          }
+                          return response.json();
+                        })
+                        .then((data) => {
+                          completedTodoStatus = !completedTodoStatus;
+                        })
+                        .catch((error) => {
+                          console.error("Error making PATCH request:", error);
+                        });
+                    }}
                     isChecked={completedTodoStatus}
                     colorScheme="green"
                     size="md"
