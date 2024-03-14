@@ -70,6 +70,7 @@ const TodosHome = () => {
               <Box>
                 <Text
                   fontSize={{ base: "md", lg: "20" }}
+                  textDecoration={Todo.completed ? "line-through" : "none"}
                   sx={{
                     fontWeight: "bold",
                     fontFamily: "DM Sans",
@@ -86,6 +87,7 @@ const TodosHome = () => {
               <Box>
                 <Text
                   fontSize={{ base: "sm", lg: "0.99rem" }}
+                  textDecoration={Todo.completed ? "line-through" : "none"}
                   sx={{
                     fontFamily: "DM Sans",
                     textAlign: "left",
