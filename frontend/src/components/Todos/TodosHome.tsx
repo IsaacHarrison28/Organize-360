@@ -11,7 +11,7 @@ const TodosHome = () => {
     id: number;
     title: string;
     description: string;
-    status: string;
+    completed: boolean;
     createdOn: Date;
   }
 
@@ -54,15 +54,11 @@ const TodosHome = () => {
         mx={{ base: "-1" }}
       >
         {listOfTodos.map((Todo) => {
-          let completedTodoStatus = false;
           let Todo_id = Todo.id;
-
-          if (Todo.status === "completed") {
-            completedTodoStatus = true;
-          }
 
           return (
             <Box
+              key={Todo.id}
               flex="1 0 calc(50% - 0.5rem)"
               m={{ base: "1" }}
               sx={{
@@ -116,13 +112,7 @@ const TodosHome = () => {
                     onChange={() => {
                       const todo_url = `http://localhost:8080/todos/${Todo_id}`;
 
-                      let new_status = "pending";
-
-                      if (completedTodoStatus === false) {
-                        new_status = "completed";
-                      }
-
-                      const new_data = { ...Todo, status: new_status };
+                      const new_data = { ...Todo, completed: !Todo.completed };
 
                       const options = {
                         method: "PATCH",
@@ -140,7 +130,6 @@ const TodosHome = () => {
                           return response.json();
                         })
                         .then((updatedObject) => {
-                          // completedTodoStatus = !completedTodoStatus;
                           const objectIndex = listOfTodos.findIndex(
                             (object) => object.id === updatedObject.id
                           );
@@ -151,7 +140,7 @@ const TodosHome = () => {
                           console.error("Error making PATCH request:", error);
                         });
                     }}
-                    isChecked={completedTodoStatus}
+                    isChecked={Todo.completed}
                     colorScheme="green"
                     size="md"
                   />
