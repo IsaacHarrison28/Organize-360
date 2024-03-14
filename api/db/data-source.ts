@@ -1,12 +1,13 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
+require('dotenv').config();
 
 export const dataSourceOptions: DataSourceOptions = {
   type: 'postgres',
-  database: 'Organize360',
-  password: 'sate2808.',
-  username: 'postgres',
-  port: 5432,
-  host: '127.0.0.1',
+  database: process.env.DATABASE_NAME,
+  password: process.env.DATABASE_PASSWORD,
+  username: process.env.DATABASE_USERNAME,
+  port: +process.env.DATABASE_PORT,
+  host: process.env.DATABASE_HOST,
   entities: [process.cwd(), 'dist/**/*.entity.js'],
   migrations: ['dist/db/migrations/*.js'],
 };
