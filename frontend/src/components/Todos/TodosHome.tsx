@@ -28,7 +28,7 @@ const TodosHome = () => {
 
   useEffect(() => {
     FetchTodos();
-  }, []);
+  }, [listOfTodos]);
 
   return (
     <Box
@@ -139,8 +139,13 @@ const TodosHome = () => {
                           }
                           return response.json();
                         })
-                        .then((data) => {
-                          completedTodoStatus = !completedTodoStatus;
+                        .then((updatedObject) => {
+                          // completedTodoStatus = !completedTodoStatus;
+                          const objectIndex = listOfTodos.findIndex(
+                            (object) => object.id === updatedObject.id
+                          );
+                          listOfTodos.splice(objectIndex, 1, updatedObject);
+                          changeListOfTodos(listOfTodos);
                         })
                         .catch((error) => {
                           console.error("Error making PATCH request:", error);

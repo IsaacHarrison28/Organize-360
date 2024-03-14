@@ -15,7 +15,7 @@ export class TodosService {
     const newTodo: Todo = new Todo();
     newTodo.title = createTodoDto.title;
     newTodo.description = createTodoDto.description;
-    newTodo.status = createTodoDto.status;
+    newTodo.completed = createTodoDto.completed;
     newTodo.createdOn = createTodoDto.createdOn;
 
     return this.TodoRepository.save(newTodo);

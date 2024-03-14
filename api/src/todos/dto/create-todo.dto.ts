@@ -1,4 +1,4 @@
-import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { TodoStatus } from '../enums/todo-status-enum';
 
 export class CreateTodoDto {
@@ -9,8 +9,8 @@ export class CreateTodoDto {
   @IsString({ message: 'Your description cannot be anything but a string' })
   description: string;
 
-  @IsEnum(TodoStatus)
-  status: TodoStatus;
+  @IsBoolean()
+  completed: boolean;
 
   //remember to build a custom validation function to conform with postgresql formats of dates
   createdOn: Date;

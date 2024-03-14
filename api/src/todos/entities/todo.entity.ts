@@ -17,11 +17,9 @@ export class Todo {
   description: string;
 
   @Column({
-    type: 'enum',
-    enum: TodoStatus,
-    default: TodoStatus.PENDING,
+    type: 'boolean',
   })
-  status: TodoStatus;
+  completed: boolean;
 
   @Column({
     type: 'date',
