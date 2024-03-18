@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./styles/DatePickerCustomStyles.css";
 import {
   Box,
   Button,
@@ -14,10 +15,13 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { Clipboard } from "../../svg-icon-components/svgs";
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, CalendarIcon } from "@chakra-ui/icons";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function TodoHeadDisplay() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [startDate, setStartDate] = useState<Date>(new Date());
 
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
@@ -101,6 +105,12 @@ export default function TodoHeadDisplay() {
                 }}
                 variant="filled"
                 placeholder="Todo Description (Optional)"
+              />
+              <DatePicker
+                showIcon
+                selected={startDate}
+                onChange={(date: Date) => setStartDate(date)}
+                icon={<CalendarIcon />}
               />
             </Stack>
           </ModalBody>
