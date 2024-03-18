@@ -113,13 +113,17 @@ export default function TodoHeadDisplay() {
                 icon={<CalendarIcon />}
               />
             </Stack>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={handleClose}>
-              Close
+            <Button
+              sx={{
+                width: "100%",
+              }}
+              my={4}
+              colorScheme="green"
+              mr={3}
+            >
+              Add Todo
             </Button>
-            {/* Additional action buttons can be added here */}
-          </ModalFooter>
+          </ModalBody>
         </ModalContent>
       </Modal>
     </Box>
